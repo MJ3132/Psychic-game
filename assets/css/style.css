@@ -8,11 +8,13 @@ header {
   font-size: 25px;
   width: 80%;
   margin: 15 auto;
+  background: url('https://lh3.ggpht.com/RHKkf_YzgC24WVjefBEHCVwZ1alzcA15oQgfsFd0tcgQo3_fgxFmLbyIGECcrZBD4KsJ=s180-rw')no-repeat center 80px white;
+
   
 
 }
 
-.underscore {
+#underscore {
 
   border: 3px solid rgb(49, 20, 20);
   font-size: 100px;
@@ -21,6 +23,7 @@ header {
   font-size: 70px;
   width: 80%;
   margin: 15 auto;
+  background: lightcoral
   
 
 }

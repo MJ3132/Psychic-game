@@ -1,4 +1,4 @@
-
+// global variables
 // create an array of words
 
     const words = ["rabbit", "cat", "mouse", "tiger", "koala"];
@@ -8,71 +8,70 @@
     var wrongWord = [];
     var underScore = [];
 
+    console.log(chosenWord);
+    
 
 
-// Dom manipulation
+// DOM manipulation
 
- var docUnderScore = document.getElementsByClassName("underscore");
-
+    var docUnderscore = document.getElementById("underscore");
+    
    
-// Main ======================================================================
-console.log(chosenWord);
 
-// create underscores based on the length of the word
+//MAIN==================================================================================
 
-
-var generateUnderscore = function () {
-
-    for (var i = 0; i < chosenWord.length; i++){
-        underScore.push("_");
-  
-
-       
-    }
+// generating underscores that match the length of the choseWord array length
+  var generateUnderscore  = function () {
+    for(let i = 0; i < chosenWord.length; i++){
+      underScore.push("_");    
+  }
     return underScore;
-} 
+}
 
+console.log(generateUnderscore());
 
-console.log(generateUnderscore()); 
-
-//  users guess
+// get users guess
 
 document.addEventListener("keypress", function (event){
-   //var keycode = event.keyCode;
-   var keyword = String.fromCharCode(event.keyCode);
-  console.log(keyword)
 
-  // if users guess is right 
-  console.log(chosenWord.indexOf(keyword));
-   if(chosenWord.indexOf(keyword)>-1){
+  var keycode = event.keyCode;
+   var keyword = String.fromCharCode(keycode);
 
-  // push/add to the right words array
-  rightWord.push(keyword);
+ // if user guesses right add to the right words array  
+ // if chosen  word matches the key word place as right
+   if(chosenWord.indexOf(keyword)> -1) {
 
-  // replace underscores with right letter
+     rightWord.push(keyword);
+      
+     console.log(rightWord);
 
-  docUnderScore[0].innerHTML = underScore.join(" ");
-  underScore[chosenWord.indexOf(keyword)] = keyword; 
- 
-   }
- 
-
-     if (underScore.join(" ") == chosenWord) {
-
-      alert("you win!");  
-      }
-
-
-   else {
-     wrongWord.push(keyword);
-
-     console.log(wrongWord);
-
-
-   } 
-
- 
-   docUnderScore.innerHTML = generateUnderscore().join(" ");
-
+     // replace underscore with right letter
+     underScore[chosenWord.indexOf(keyword)] = keyword;
+     docUnderscore.innerHTML = underScore.join(" ");
+     // checks to see if user word matches guesses
+          if(underScore.join(" ") == chosenWord) {
+            alert("you win!");
+          }
+        }
+  // else if use guesses wrong add it to the wrong array
+    else {
+      wrongWord.push(keyword);
+      console.log(wrongWord);
+      
+  }
 });
+
+
+
+
+
+docUnderscore.innerHTML = generateUnderscore().join(" ");
+
+
+
+
+
+
+
+  
 
