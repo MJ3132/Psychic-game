@@ -1,77 +1,135 @@
-// global variables
-// create an array of words
 
-    const words = ["rabbit", "cat", "mouse", "tiger", "koala"];
-    var ranNum = Math.floor(Math.random() * words.length);
-    var chosenWord = words[ranNum];
-    var rightWord = [];
-    var wrongWord = [];
-    var underScore = [];
+//GLOBAL VARIABLES
 
-    console.log(chosenWord);
-    
+// Arrays and variables for holding data
+
+var wordOptions = ["koala","kangaroo","elephant","bear", "rabbit"];
+var selectedWord = "";
+var lettersinWord= [];
+var numBlanks = 0;
+var blanksAndSucceses = [];
+var wrongLetters = [];
+
+// Game counters
+
+var winCount = 0;
+var lossCount = 0;
+var guessesLeft = 9;
 
 
-// DOM manipulation
 
-    var docUnderscore = document.getElementById("underscore");
-    
-   
 
-//MAIN==================================================================================
+//FUNCTIONS (Reusable blocks of code that I will call upon when needed)
+//=====================================================================
 
-// generating underscores that match the length of the choseWord array length
-  var generateUnderscore  = function () {
-    for(let i = 0; i < chosenWord.length; i++){
-      underScore.push("_");    
-  }
-    return underScore;
+function startGame (){
+    selectedWord = wordOptions[Math.floor(Math.random()* wordOptions.length)];
+    lettersinWord = selectedWord.split("");
+    numBlanks = lettersinWord.length;
+
+//Reset
+    guessesLeft = 9;
+    wrongLetters= [];
+    blanksAndSucceses= [];
+
+
+
+// Populate blanks and successes with right number of blanks
+
+    for( var i = 0; i < numBlanks; i++){
+        blanksAndSucceses.push("_");
+    }
+
+// Change HTML to reflect round conditions
+    document.getElementById("wordToGuess").innerHTML = blanksAndSucceses.join(" ");
+    document.getElementById("numGuesses").innerHTML = guessesLeft;
+    document.getElementById("winCounter").innerHTML = winCount;
+    document.getElementById("lossCounter").innerHTML = lossCount;
+    //  testing and debugging
+//  testing and debugging
+    console.log(selectedWord);
+    console.log(lettersinWord);
+    console.log(numBlanks);
+    console.log(blanksAndSucceses);
 }
 
-console.log(generateUnderscore());
+function checkLetters (letter) {
+    // check if letters exists in code at all
 
-// get users guess
-
-document.addEventListener("keypress", function (event){
-
-  var keycode = event.keyCode;
-   var keyword = String.fromCharCode(keycode);
-
- // if user guesses right add to the right words array  
- // if chosen  word matches the key word place as right
-   if(chosenWord.indexOf(keyword)> -1) {
-
-     rightWord.push(keyword);
-      
-     console.log(rightWord);
-
-     // replace underscore with right letter
-     underScore[chosenWord.indexOf(keyword)] = keyword;
-     docUnderscore.innerHTML = underScore.join(" ");
-     // checks to see if user word matches guesses
-          if(underScore.join(" ") == chosenWord) {
-            alert("you win!");
-          }
-        }
-  // else if use guesses wrong add it to the wrong array
-    else {
-      wrongWord.push(keyword);
-      console.log(wrongWord);
-      
-  }
-});
-
-
-
-
-
-docUnderscore.innerHTML = generateUnderscore().join(" ");
-
-
-
-
-
-
-
+    var isLetterinWord = false;
   
+    for (var i = 0; i<numBlanks; i++){
+        if(selectedWord[i] == letter) {
+            isLetterinWord = true;   
+            
+        }
+    }
+    //Check where in word letter exists, then populate out blanksAndSuccesses array
+    if(isLetterinWord){
+     
+        for (var i=0; i<numBlanks; i++){
+            if (selectedWord[i] == letter){
+                blanksAndSucceses[i] = letter;
+              
+            }
+        }
+    }
+    // letter was not found
+    else {
+        wrongLetters.push(letter);
+        guessesLeft --
+        console.log(guessesLeft);
+    }
+    //Testing / Debugging
+    console.log(blanksAndSucceses);
+}
 
+function roundComplete() {
+   console.log("win Count: " + winCount + " | loss Count: " + lossCount + "| Guesses Left " + guessesLeft);
+   //update the HTML to reflect the most recent count stats
+
+   document.getElementById("numGuesses").innerHTML = guessesLeft;
+   document.getElementById("wordToGuess").innerHTML = blanksAndSucceses.join(" ");
+   document.getElementById("wrongGuesses").innerHTML = wrongLetters.join(" ");
+   
+
+   //check if user won
+   if(lettersinWord.toString()== blanksAndSucceses.toString()) {
+       winCount++;
+       alert("You Won!");
+    // Update the win counter in the HTML
+    document.getElementById("winCounter").innerHTML = winCount;   
+    startGame();
+    //check if user lost
+
+
+   }
+
+   else if (guessesLeft == 0) {
+       lossCount++;
+       alert("You Lost!");
+
+       //update the HTML
+
+       document.getElementById("lossCounter").innerHTML= lossCount;
+    startGame();
+    }
+}
+
+
+   
+//MAIN PROCESS
+//=====================================================================
+// Initiates the code the first time
+
+startGame ();
+
+
+//Register key clicks
+
+document.onkeyup = function (event) {
+    var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+   checkLetters(letterGuessed);
+   roundComplete();
+   
+}

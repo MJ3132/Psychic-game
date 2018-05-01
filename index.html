@@ -1,42 +1,70 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="assets/css/reset.css">
-<link rel="stylesheet" href="assets/css/style.css">
-
-
-<title>Hangman</title>
-</head>
-<body>
-
-    <div class = "container">
-        <header>
-            <h1> Hangman Game</h1>
-            
-        </header>
-        <br>
-        <div id = "underscore">
-           
-        </div>
-        <br>
-       
-        <div class = "right-guess"> Right guess </div>
-        <br>
-        <div class = "wrong-guess"> Wrong guess</div>
-    </div>
- 
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     
+    <title>Hangman</title>
+</head>
+<style>
+body {
+    background: url('https://i.ytimg.com/vi/r91yPViqRX0/maxresdefault.jpg')no-repeat center center white;
+} 
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-<script src="assets/javascript/game.js"></script>
+
+</style>
+
+
+<body>
+<div class= container>
+    <div class="jumbotron">
+        <h1>Hangman Game</h1>
+        <p>Guess the animals!</p>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"> word to guess</h3>
+        </div>
+
+        <div class="panel-body">
+            <h2 id = "wordToGuess" >_ _ _ _ </h2>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            wrong Guesses :<span id="wrongGuesses"></span>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            Guesses left : <span id="numGuesses"></span>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            win counter : <span id="winCounter"></span>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            loss counter : <span id="lossCounter"></span>
+        </div>
+    </div>
+
+</div>
+
+
+    <script src="assets/javascript/game.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   
 </body>
+
 </html>
